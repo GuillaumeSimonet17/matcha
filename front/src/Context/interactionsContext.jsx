@@ -32,9 +32,9 @@ export function useInteractionsContext() {
 const InteractionsContextProvider = ({ children }) => {
   const navigate = useNavigate();
 	// users
-	const { socket } = useUserContext();
+	const { socket, user, id } = useUserContext();
   // const [isNotifs, setIsNotifs] = useState(false)
-  const [user, setUser] = useState(false)
+  // const [user, setUser] = useState(false)
 
   const [blocked, setBlocked] = useState([])
   const [likes, setLikes] = useState([])
@@ -48,40 +48,40 @@ const InteractionsContextProvider = ({ children }) => {
   const [witchConvUser, setWitchConvUser] = useState(null);
   const [recvmsg, setRecvmsg] = useState(false);
 
-
   // function
-  async function getUser() {
-    const jwtToken = Cookies.get("jwtToken");
-    try {
-      axios
-        .get("http://localhost:8080/get_user", {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        })
-        .then((response) => {
-          setUser(response.data);
-        })
-        .catch((error) => {
-          Cookies.remove('jwtToken')
-          navigate("/")
-          console.log('error : ', error);
-        });
+  // async function getUser() {
+  //   const jwtToken = Cookies.get("jwtToken");
+  //   try {
+  //     axios
+  //       .get("http://localhost:8080/get_user", {
+  //         headers: {
+  //           Authorization: `Bearer ${jwtToken}`,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         setUser(response.data);
+  //       })
+  //       .catch((error) => {
+  //         Cookies.remove('jwtToken')
+  //         navigate("/")
+  //         console.log('error : ', error);
+  //       });
 
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
   async function fetchFriendship() {
     const jwtToken = Cookies.get("jwtToken");
    
-    await getUser();
+    // await getUser();
     if (!user.userid) return ;
+
     setBlocked(user.blocked)
     try {
       axios
-        .get(`http://localhost:8080/get_friendships/${user.userid}`, {
+        .get(`http://localhost:8080/get_friendships/${id}`, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
           },
@@ -113,10 +113,12 @@ const InteractionsContextProvider = ({ children }) => {
               if (friendship.sourceuserid === user.userid) {
                 setUnliked([...unliked, friendship.targetuserid]);
                 setLiked(liked.filter(like => like !== friendship.targetuserid));
+                setMatches(matches.filter(match => match !== friendship.targetuserid));
               }
               if (friendship.targetuserid === user.userid) {
                 setUnlikes([...unlikes, friendship.sourceuserid]);
                 setLikes(likes.filter(like => like !== friendship.sourceuserid));
+                setMatches(matches.filter(match => match !== friendship.sourceuserid));
               }
             });
             
@@ -336,7 +338,6 @@ const InteractionsContextProvider = ({ children }) => {
   }
   async function isThereNotif(userid) {
     if (!userid) return ;
-    console.log('ici boyyy => ', userid);
     const jwtToken = Cookies.get('jwtToken');
     try {
       const response = await axios.get(`http://localhost:8080/is_there_notif/${user.userid}/${userid}/${'m'}`, {

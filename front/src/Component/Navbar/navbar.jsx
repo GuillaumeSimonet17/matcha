@@ -7,23 +7,40 @@ import { useInteractionsContext } from "../../Context/interactionsContext";
 
 
 function Navbar() {
-  const { setTabActive, tabActive, user, setProfileVisible } = useUserContext();
-  const { getNotifsMsg, setAllNotifsMsg, witchConvUser, deleteNotif, blocked, setWitchConvUser, allNotifsMsg, getNotifs, allNotifsFriendship, messages } = useInteractionsContext()
+  const { setTabActive, tabActive, id, fetchContext, setProfileVisible } = useUserContext();
+  const { fetchFriendship, getNotifsMsg, setAllNotifsMsg, witchConvUser, deleteNotif, blocked, setWitchConvUser, allNotifsMsg, getNotifs, allNotifsFriendship, messages, matches, unlikes, unliked } = useInteractionsContext()
 
   // UseEffect
   useEffect(() => {
     if (tabActive !== "chat")
       setWitchConvUser(null)
-    getNotifs()
-    getNotifsMsg()
+    // getNotifs()
+    // getNotifsMsg()
     // eslint-disable-next-line
-  }, [tabActive, user])
+  }, [tabActive])
+
+  useEffect(() => {
+    fetchContext()
+  }, [])
+
+  useEffect(() => {
+    if (id !== undefined) {
+      fetchFriendship()
+      getNotifs()
+      getNotifsMsg()
+    }
+  }, [id])
 
   useEffect(() => {
     deleteNotif(witchConvUser)
-    const updatedNotifsMsg = allNotifsMsg.filter((notif) => notif !== witchConvUser);
+    const updatedNotifsMsg = allNotifsMsg.filter((notif) => (notif !== witchConvUser));
     setAllNotifsMsg(updatedNotifsMsg);
   }, [messages])
+
+  useEffect(() => {
+    const updatedNotifsMsg = allNotifsMsg.filter((notif) => (!unlikes.includes(notif) && !unliked.includes(notif) && matches.includes(notif)));
+    setAllNotifsMsg(updatedNotifsMsg);
+  }, [unlikes, unliked, matches])
 
   useEffect(() => {
     getNotifs()
@@ -45,8 +62,8 @@ function Navbar() {
       <ul>
         <li className="chatLink" onClick={() => handleClick("chat")}>
           <div>
-            {allNotifsMsg.length > 0 &&
-              <div style={{width: '20px', height: '20px', position: 'absolute', background: 'red', color: 'white', borderRadius: '50px'}}>{allNotifsMsg.length}</div>
+            {allNotifsMsg.filter((notif) => (notif !== witchConvUser && matches.includes(notif) && !unlikes.includes(notif) && !unliked.includes(notif))).length > 0 &&
+              <div style={{width: '20px', height: '20px', position: 'absolute', background: 'red', color: 'white', borderRadius: '50px'}}>{allNotifsMsg.filter((notif) => (notif !== witchConvUser && matches.includes(notif) && !unlikes.includes(notif) && !unliked.includes(notif))).length}</div>
             }
             <svg
               fill="white"

@@ -42,11 +42,10 @@
   flex-direction: column;
 }
 .chat .navVisible .navBarChat .conversation {
-  background-color: white;
   padding-left: 15px;
   display: flex;
   height: 70px;
-  background-color: rgba(1, 2, 32, 0.936);
+  background-color: rgba(51, 53, 109, 0.936);
   text-align: left;
   justify-content: center;
   align-items: center;

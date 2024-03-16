@@ -16,5 +16,10 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Define the command to run the application
-CMD ["npm", "start"]
+COPY start_front.sh /
+
+# Give execute permission to the script
+RUN chmod +x /start_front.sh
+
+# Start the application
+CMD ["/start_front.sh"]
