@@ -1,0 +1,114 @@
+.profile {
+  background-color: rgba(1, 2, 32, 0.936);
+  padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    display: none;
+    z-index: 100;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 1100px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 8px;
+
+    .pics {
+      background-color: white;
+      height: 500px;
+      width: 100%;
+      overflow-x: scroll;
+      white-space: nowrap;
+      scroll-snap-type: x mandatory;
+      .image {
+        display: inline-block;
+        width: 100%;
+        min-width: 300px;
+        height: 400px;
+        scroll-snap-align: flex-start;
+        margin-right: 10px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .infos {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      height: 250px;
+      padding: 20px;
+
+      p {
+        text-align: left;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 30px;
+        padding: 10px;
+      }
+  
+      ul {
+          margin-top: 5px;
+          width: 100%;
+          height: 100px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          list-style-type: none;
+
+          // li {
+          //     justify-content: start;
+          // }
+      }
+      .tags {
+        .tag {
+          padding: 5px;
+          height: 30px;
+          background: rgb(0, 69, 197);
+          color: white;
+          border-radius: 3px;
+          padding: 5px 10px;
+          margin-left: 5px;
+        }
+      }
+    }
+
+    .viewedhistory {
+      width: 100%;
+      text-align: left;
+      .viewed {
+        margin-top: 30px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        height: 190px;
+        width: 100%;
+        
+        li {
+          height: 40px;
+          text-align: left;
+          display: flex;
+          align-items: center;
+          margin-top: 5px;
+
+          p {
+            height: 30px;
+            width: 20%;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgb(138, 72, 103);
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 40px;
+          }
+        }
+      }
+    }
+  }
+  .active {
+    display: flex;
+  }
+  

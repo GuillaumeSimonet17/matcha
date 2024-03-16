@@ -1,0 +1,23 @@
+$greenMain: #80b94e;
+
+* {
+    margin: 0;
+    height: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    list-style-type: none;
+
+}
+
+body {
+    background-color: rgba(173, 154, 255, 0.936);
+    height: 100vh;
+    width: 100%;
+    color: white;
+    // border: 1px solid red;
+}
+
+button {
+    cursor: pointer;
+}

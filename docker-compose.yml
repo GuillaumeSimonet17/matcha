@@ -1,0 +1,64 @@
+version: '3'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./back 
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./back:/express-docker
+    depends_on:
+      - db
+    networks:
+      - default
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes: 
+      - ./front:/usr/src/app
+    networks:
+      - default
+
+  db:
+    container_name: db
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: matcha_app
+      POSTGRES_DB: db
+      POSTGRES_PASSWORD: test
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+    env_file:
+    - .env
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+    image: nginx
+    ports:
+      - 443:443
+    env_file:
+      - .env
+    depends_on:
+      - backend
+    networks:
+      - default

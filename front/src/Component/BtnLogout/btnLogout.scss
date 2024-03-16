@@ -1,0 +1,38 @@
+.header {
+    background-color: white;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    p {
+        font-size: 2em;
+        color: black;
+    }
+
+    .btn-logout {
+        z-index: 50;
+        width: 50px;
+        height: 40px;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+      
+
+        button {
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            border: none;
+            background-color: white;
+            svg {
+                height: 40px;
+            }
+        }
+    }
+}

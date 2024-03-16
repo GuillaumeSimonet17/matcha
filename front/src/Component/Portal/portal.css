@@ -1,0 +1,87 @@
+.portal {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(1, 2, 32, 0.936);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.portal .nav {
+  display: flex;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 20px;
+  width: 50%;
+  height: 100px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 100px;
+  border-bottom: 1px solid rgb(255, 107, 107);
+}
+.portal .nav p {
+  cursor: pointer;
+}
+.portal .register, .portal .login {
+  padding: 30px;
+  border: 1px solid rgb(255, 107, 107);
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.portal .register h4, .portal .login h4 {
+  margin-bottom: 20px;
+}
+.portal .register form, .portal .login form {
+  margin-top: 20px;
+  height: 200px;
+}
+.portal .register form .tags, .portal .login form .tags {
+  display: flex;
+  height: 100px;
+  list-style-type: none;
+}
+.portal .register form .field, .portal .login form .field {
+  height: 50px;
+}
+.portal .register form .field input, .portal .register form .field select, .portal .login form .field input, .portal .login form .field select {
+  border: 1px solid transparent;
+  outline: none;
+  padding: 15px 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.portal .register form .field .tag, .portal .login form .field .tag {
+  background: white;
+  border-radius: 6px;
+  height: 20px;
+  padding: 10px;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+.portal .register form .field .checked, .portal .login form .field .checked {
+  background-color: rgb(138, 72, 103);
+}
+.portal .register form .uploadPics, .portal .login form .uploadPics {
+  height: 80px;
+}
+.portal .register form .uploadPics input, .portal .login form .uploadPics input {
+  height: 100px;
+}
+.portal .register .btn, .portal .login .btn {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.portal .register .btn button, .portal .login .btn button {
+  display: flex;
+  border: 1px solid transparent;
+  padding: 15px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-color: rgba(248, 252, 208, 0.943);
+}
+.portal .register .btn button:active, .portal .login .btn button:active {
+  transform: scale(1.5);
+}/*# sourceMappingURL=portal.css.map */

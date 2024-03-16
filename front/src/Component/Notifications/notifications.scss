@@ -1,0 +1,45 @@
+.notifications {
+    height: 100vh;
+    background-color: rgba(1, 2, 32, 0.936);
+    width: 100%;
+    width: 800px;
+    display: none;
+
+    .notifcontainer {
+        margin-top: 50px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align-last: left;
+        padding: 10px;
+        padding-bottom: 500px;
+        width: 100%;
+
+        .notiftab {
+            margin-top: 20px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            p {
+                height: 30px;
+                background-color: white;
+                padding: 0 10px;
+                display: flex;
+                align-items: center;
+            }
+            li {
+                cursor: pointer;                
+                background-color: white;
+                color: black;
+                max-width: 400px;
+                margin-top: 5px;
+                padding: 10px;
+                height: 40px;
+            }
+        }
+    }
+}
+.active {
+    display: flex;
+    flex-direction: column
+}

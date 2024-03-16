@@ -1,0 +1,108 @@
+.search {
+  background-color: rgba(208, 245, 252, 0.943);
+  width: 100%;
+  max-width: 800px;
+  display: none;
+}
+.search .cardsContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 20px;
+  margin-top: 100px;
+}
+.search .cardsContainer .card {
+  border: 5px solid rgba(11, 8, 58, 0.692);
+  box-shadow: rgba(12, 12, 12, 0.261) 0px 7px 29px 0px;
+  background-color: rgba(1, 2, 32, 0.936);
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 85vh;
+  width: 100%;
+  max-width: 800px;
+  padding: 30px 20px;
+}
+.search .cardsContainer .card .infosProfile {
+  cursor: pointer;
+  height: 90%;
+  display: flex;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.144);
+  border-radius: 8px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.search .cardsContainer .card .infosProfile .images {
+  height: 500px;
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.search .cardsContainer .card .infosProfile .images img {
+  height: 250px;
+  width: 250px;
+}
+.search .cardsContainer .card .infosProfile .infos {
+  border-top: 1px solid rgba(255, 255, 255, 0.151);
+  height: 30%;
+  width: 100%;
+  bottom: 0;
+  -moz-text-align-last: left;
+       text-align-last: left;
+}
+.search .cardsContainer .card .infosProfile .infos h3, .search .cardsContainer .card .infosProfile .infos p {
+  height: 10px;
+  padding: 20px;
+}
+.search .cardsContainer .card .infosProfile .infos .tags {
+  margin-top: 20px;
+  height: 50px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.search .cardsContainer .card .actions {
+  margin-top: 10px;
+  height: 70px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.search .cardsContainer .card .actions button {
+  cursor: pointer;
+  height: 40px;
+  padding: 0px 40px;
+  text-align: center;
+  font-size: 1.4em;
+  border: transparent;
+  background-color: rgb(138, 72, 103);
+  border-bottom: 5px solid;
+  border-left: 5px solid;
+  margin-left: 5px;
+}
+.search .cardsContainer .card .actions button:active {
+  transform: scale(1.02);
+}
+
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.active .cardsContainer {
+  display: flex;
+  margin-left: 10px;
+}
+.active .cardsContainer .card {
+  position: absolute;
+}/*# sourceMappingURL=search.css.map */
