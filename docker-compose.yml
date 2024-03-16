@@ -28,6 +28,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     volumes: 
       - ./front:/usr/src/app
     networks:

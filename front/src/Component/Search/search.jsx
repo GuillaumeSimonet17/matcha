@@ -17,31 +17,37 @@ function Search() {
   const navigate = useNavigate();
   // states
   const [visible, setVisible] = useState(false);
-  const { tabActive, setTabActive, profileVisible, setProfileVisible, setUserSelected } = useContext(UserContext);
+  const { tabActive, setTabActive, profileVisible, setProfileVisible, setUserSelected, user, id, fetchContext } = useContext(UserContext);
   // users
   const [allUsers, setAllUsers] = useState([]);
-  const { user, fetchContext } = useUserContext();
+  // const { user, fetchContext } = useUserContext();
 
   const { fetchFriendship, sendLogout, blocked, unliked, unlikes, matches } = useInteractionsContext();
 
-  // useEffects
+    // useEffects
+    useEffect(() => {
+      if (tabActive === "search") {
+        setVisible(true)
+        fetchFriendship()
+        GetAllUsers()
+      } else {
+        setVisible(false);    
+      }
+      // eslint-disable-next-line
+    }, [tabActive]);
+
   useEffect(() => {
-    if (tabActive === "search") {
-      fetchContext()
+    fetchContext()
+  }, [])
+
+  useEffect(() => {
+    if (id !== undefined) {
+      fetchFriendship()
       GetAllUsers()
-    } else {
-      setVisible(false);
     }
-    // eslint-disable-next-line
-  }, [tabActive]);
+  }, [id])
 
-  // useEffect(() => {
-  //   GetAllUsers()
-  // }, [visible, user, unlikes, unliked, blocked])
-
-  // functions
   async function GetAllUsers() {
-    fetchFriendship()
     const jwtToken = Cookies.get("jwtToken");
     try {
       axios
@@ -129,7 +135,6 @@ function Search() {
       const fameRate = await fame_rate_calcul(profile.userid);
       return (fameRate === 0 || fameRate >= user.filter_fame_rate) // fameRate === 0 temporary
     });
-
     setAllUsers(filteredUser)
     setVisible(true);
   }
@@ -168,60 +173,62 @@ function Search() {
       <BtnLogout />
       {visible && !profileVisible && (
         <div className={`search ${visible === true ? "active" : ""}`}>
-          <ul className="cardsContainer">
-            {allUsers !== undefined && allUsers.length > 0 && allUsers.filter(
-              profile =>
-              !blocked?.includes(profile.userid)
-                // && profile.genre === user.sexual_pref
-                && !matches?.includes(profile.userid)
-                && !unlikes?.includes(profile.userid)
-                && !unliked?.includes(profile.userid)
-                && !user.nexted?.includes(profile.userid)
-                // && (user.genre === profile.sexual_pref || profile.sexual_pref === 'B')
-                && (profile.age >= user.age_gap[0] && profile.age <= user.age_gap[1])
-              // && (commonTags(user, profile) || (user.tags?.length === 0 && profile.tags?.length === 0))
-              // Filter suggestion by settings's location 
-            )
-              .map((profile, index) => {
-                if (profile.userid !== user.userid) {
-                  return (
-                    <li key={index} className="card">
-                      <div
-                        className="infosProfile"
-                        onClick={() => {
-                          setprofile(profile);
-                        }}
-                      >
-                        <div className="images">
-                          <img src={require("../../assets/pngwing.com.png")} alt='' />
-                        </div>
+          {allUsers?.length > 0 &&
+            <ul className="cardsContainer">
+              {allUsers.filter(
+                profile =>
+                !blocked?.includes(profile.userid)
+                  // && profile.genre === user.sexual_pref
+                  && !matches?.includes(profile.userid)
+                  && !unlikes?.includes(profile.userid)
+                  && !unliked?.includes(profile.userid)
+                  && !user.nexted?.includes(profile.userid)
+                  // && (user.genre === profile.sexual_pref || profile.sexual_pref === 'B')
+                  && (profile.age >= user.age_gap[0] && profile.age <= user.age_gap[1])
+                // && (commonTags(user, profile) || (user.tags?.length === 0 && profile.tags?.length === 0))
+                // Filter suggestion by settings's location 
+              )
+                .map((profile, index) => {
+                  if (profile.userid !== user.userid) {
+                    return (
+                      <li key={index} className="card">
+                        <div
+                          className="infosProfile"
+                          onClick={() => {
+                            setprofile(profile);
+                          }}
+                        >
+                          <div className="images">
+                            <img src={require("../../assets/pngwing.com.png")} alt='' />
+                          </div>
 
-                        <div className="infos">
-                          <h3>{profile.firstname}, {profile.age} ans</h3>
-                          <p>{profile.genre === 'M' ? 'Man' : 'Woman'}</p>
-                          <p>My bio: {profile.bio}</p>
-                          {
-                            profile.tags.map((tag, index) => {
-                              return (
-                                <div className="tags">
-                                  <li>{tag.name}</li>
-                                </div>
-                              )
-                            })
-                          }
+                          <div className="infos">
+                            <h3>{profile.firstname}, {profile.age} ans</h3>
+                            <p>{profile.genre === 'M' ? 'Man' : 'Woman'}</p>
+                            <p>My bio: {profile.bio}</p>
+                            {
+                              profile.tags.map((tag, index) => {
+                                return (
+                                  <div key={index} className="tags">
+                                    <span>{tag.name}</span>
+                                  </div>
+                                )
+                              })
+                            }
+                          </div>
                         </div>
-                      </div>
-                      <div className="actions">
-                        <button onClick={() => next(profile.userid)}>next</button>
-                      </div>
-                    </li>
-                  );
-                } else {
-                  return null;
-                }
-              })
-            }
-          </ul>
+                        <div className="actions">
+                          <button onClick={() => next(profile.userid)}>next</button>
+                        </div>
+                      </li>
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+              }
+            </ul>
+          }
         </div>
       )}
     </>
